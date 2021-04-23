@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <header>
+      <h1>MY LIBRARY</h1>
+    </header>
+    <section>
+      <div class="container">
+        <table id="library">
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages Number</th>
+            <th>Read Status</th>
+          </tr>
+        </table>
+      </div>
+      <div id="form-popup">
+        <div class="form-content">
+          <span class="close">&times;</span>
+          <h1>Add Book</h1>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Enter Author Name"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Enter Title of a Book"
+            required
+          />
+          <br />
+          <input
+            type="number"
+            name="pages"
+            id="pages"
+            placeholder="Enter Number of Pages"
+            required
+          />
+          <br />
+          <input type="checkbox" name="status" id="status" value="not read" />
+          <label for="status">Read?</label>
+          <br />
+          <button type="submit" class="btn" id="addBook">Add</button>
+        </div>
+      </div>
+      <button type="submit" class="btn" id="btn-open">Add book</button>
+    </section>
+    <script src="/script.js"></script>
+  </body>
+</html>
