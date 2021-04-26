@@ -48,15 +48,14 @@ window.onclick = function (event) {
 const author = document.getElementById('author');
 const title = document.getElementById('title');
 const pages = document.getElementById('pages');
-const status = document.getElementById('status');
 
 btnAddBook.addEventListener('click', () => {
-  let newBook = new Book(author.value, title.value, pages.value, status.value);
+  let status = document.querySelector('input[name="status"]:checked').value;
+  let newBook = new Book(author.value, title.value, pages.value, status);
   myLibrary.push(newBook);
   author.value = '';
   title.value = '';
   pages.value = '';
-  status.value = '';
   formPopup.style.display = 'none';
   table.innerHTML = '';
   updateTable();

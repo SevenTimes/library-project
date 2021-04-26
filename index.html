@@ -53,8 +53,10 @@
             required
           />
           <br />
-          <input type="checkbox" name="status" id="status" value="not read" />
-          <label for="status">Read?</label>
+          <input type="radio" name="status" id="read" value="read" checked />
+          <label for="read">Read</label>
+          <input type="radio" name="status" id="notRead" value="not read" />
+          <label for="notRead">Not Read</label>
           <br />
           <button type="submit" class="btn" id="addBook">Add</button>
         </div>
