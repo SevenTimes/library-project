@@ -1,5 +1,7 @@
 let myLibrary = [];
-const table = document.getElementById('library');
+const table = document
+  .getElementById('library')
+  .getElementsByTagName('tbody')[0];
 const btnAddBook = document.getElementById('addBook');
 
 function Book(title, author, pages, status) {
@@ -15,14 +17,18 @@ myLibrary.push(testBook, testBook2);
 console.log(testBook);
 console.log(myLibrary);
 
-myLibrary.forEach((book) => {
-  let row = table.insertRow(-1);
-  for (const prop in book) {
-    let newCell = row.insertCell(-1);
-    let newText = document.createTextNode(book[prop]);
-    newCell.appendChild(newText);
-  }
-});
+function updateTable() {
+  myLibrary.forEach((book) => {
+    let row = table.insertRow(-1);
+    row.setAttribute('class', 'data-book-row');
+    for (const prop in book) {
+      let newCell = row.insertCell(-1);
+      let newText = document.createTextNode(book[prop]);
+      newCell.appendChild(newText);
+    }
+  });
+}
+updateTable();
 
 // Popup Form
 
@@ -47,4 +53,11 @@ const status = document.getElementById('status');
 btnAddBook.addEventListener('click', () => {
   let newBook = new Book(author.value, title.value, pages.value, status.value);
   myLibrary.push(newBook);
+  author.value = '';
+  title.value = '';
+  pages.value = '';
+  status.value = '';
+  formPopup.style.display = 'none';
+  table.innerHTML = '';
+  updateTable();
 });
