@@ -14,12 +14,30 @@ function Book(title, author, pages, status) {
 function updateTable() {
   myLibrary.forEach((book, index) => {
     let row = table.insertRow(-1);
-    // row.setAttribute('id', `data-${index}`);
     for (const prop in book) {
       let newCell = row.insertCell(-1);
       let newText = document.createTextNode(book[prop]);
       newCell.appendChild(newText);
     }
+    let readStatus = row.insertCell(-1);
+    let readStatusBtn = document.createElement('BUTTON');
+    readStatusBtn.setAttribute('class', 'readStatus');
+    readStatusBtn.setAttribute('id', `data-status-${index}`);
+    readStatusBtn.innerHTML = 'Change read status';
+    readStatusBtn.addEventListener('click', () => {
+      let readEl = table
+        .querySelectorAll('tr')
+        [index].querySelectorAll('td')[3];
+      const r = 'read';
+      const nr = 'not read';
+      if (readEl.innerHTML === r) {
+        readEl.innerHTML = nr;
+      } else if (readEl.innerHTML === nr) {
+        readEl.innerHTML = r;
+      }
+    });
+    readStatus.appendChild(readStatusBtn);
+
     let delBtn = row.insertCell(-1);
     let delElement = document.createElement('BUTTON');
     delElement.setAttribute('class', 'delBtns');
