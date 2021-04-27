@@ -18,6 +18,7 @@ function Book(title, author, pages, status) {
 }
 
 function updateTable() {
+  table.innerHTML = '';
   myLibrary.forEach((book, index) => {
     let row = table.insertRow(-1);
     for (const prop in book) {
@@ -36,11 +37,13 @@ function updateTable() {
         [index].querySelectorAll('td')[3];
       const r = 'read';
       const nr = 'not read';
-      if (readEl.innerHTML === r) {
-        readEl.innerHTML = nr;
-      } else if (readEl.innerHTML === nr) {
-        readEl.innerHTML = r;
+      if (book.status === r) {
+        book.status = nr;
+      } else if (book.status === nr) {
+        book.status = r;
       }
+      localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+      updateTable();
     });
     readStatus.appendChild(readStatusBtn);
 
@@ -54,7 +57,6 @@ function updateTable() {
       table.deleteRow(delBtn.parentNode.rowIndex - 1);
       myLibrary.splice(num, 1);
       localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-      table.innerHTML = '';
       updateTable();
     });
     delBtn.appendChild(delElement);
@@ -86,7 +88,6 @@ btnAddBook.addEventListener('click', () => {
   title.value = '';
   pages.value = '';
   formPopup.style.display = 'none';
-  table.innerHTML = '';
   updateTable();
 });
 
