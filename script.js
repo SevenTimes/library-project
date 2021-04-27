@@ -32,9 +32,6 @@ function updateTable() {
     readStatusBtn.setAttribute('id', `data-status-${index}`);
     readStatusBtn.innerHTML = 'Change read status';
     readStatusBtn.addEventListener('click', () => {
-      let readEl = table
-        .querySelectorAll('tr')
-        [index].querySelectorAll('td')[3];
       const r = 'read';
       const nr = 'not read';
       if (book.status === r) {
