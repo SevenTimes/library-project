@@ -1,4 +1,10 @@
-let myLibrary = [];
+let myLibrary;
+if (localStorage.getItem('myLibrary')) {
+  myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+} else {
+  myLibrary = [];
+}
+
 const table = document
   .getElementById('library')
   .getElementsByTagName('tbody')[0];
@@ -47,6 +53,7 @@ function updateTable() {
       const num = delElement.id.slice(5);
       table.deleteRow(delBtn.parentNode.rowIndex - 1);
       myLibrary.splice(num, 1);
+      localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
       table.innerHTML = '';
       updateTable();
     });
@@ -74,6 +81,7 @@ btnAddBook.addEventListener('click', () => {
   let status = document.querySelector('input[name="status"]:checked').value;
   let newBook = new Book(author.value, title.value, pages.value, status);
   myLibrary.push(newBook);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   author.value = '';
   title.value = '';
   pages.value = '';
@@ -81,3 +89,5 @@ btnAddBook.addEventListener('click', () => {
   table.innerHTML = '';
   updateTable();
 });
+
+updateTable();
