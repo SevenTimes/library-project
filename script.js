@@ -8,29 +8,33 @@ function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = status; //read or not read yet
+  this.status = status;
 }
 
-let testBook = new Book('Test', 'Me', 1, 'read');
-let testBook2 = new Book('newTest', 'Also Me', 2, 'not read');
-myLibrary.push(testBook, testBook2);
-console.log(testBook);
-console.log(myLibrary);
-
 function updateTable() {
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, index) => {
     let row = table.insertRow(-1);
-    row.setAttribute('class', 'data-book-row');
+    // row.setAttribute('id', `data-${index}`);
     for (const prop in book) {
       let newCell = row.insertCell(-1);
       let newText = document.createTextNode(book[prop]);
       newCell.appendChild(newText);
     }
+    let delBtn = row.insertCell(-1);
+    let delElement = document.createElement('BUTTON');
+    delElement.setAttribute('class', 'delBtns');
+    delElement.setAttribute('id', `data-${index}`);
+    delElement.innerHTML = 'Delete';
+    delElement.addEventListener('click', () => {
+      const num = delElement.id.slice(5);
+      table.deleteRow(delBtn.parentNode.rowIndex - 1);
+      myLibrary.splice(num, 1);
+      table.innerHTML = '';
+      updateTable();
+    });
+    delBtn.appendChild(delElement);
   });
 }
-updateTable();
-
-// Popup Form
 
 const formPopup = document.getElementById('form-popup');
 const btnOpen = document.getElementById('btn-open');
@@ -44,7 +48,6 @@ window.onclick = function (event) {
   }
 };
 
-// Adding books to array and table
 const author = document.getElementById('author');
 const title = document.getElementById('title');
 const pages = document.getElementById('pages');
